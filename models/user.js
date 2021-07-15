@@ -5,24 +5,20 @@ const UserSchema = new Schema(
     {
         username: {
             type: String,
-            // Need to figure out unique
-            //unique:
+            unique: true,
             required: true,
             trim: true
         },
         email: {
             type: String,
-            required: true,
-            // Need to figure out unique
-            //unique:
+            required: [ true, 'Need email address' ],
+            unique: true
             // must match a valid email address (mongoose matching validation)
         },
-        thoughts: {
-            // array of _id values referencing the Thought model
-        },
-        friends: {
+        // array of _id values referencing the Thought model,
+        thoughts: [],
             // array of _id values referencing the User model(self-reference)
-        }
+        friends: []
     },
     {
         toJSON: {
