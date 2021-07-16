@@ -1,6 +1,7 @@
 const dateFormat = require('../utils/dateFormat');
 const { Schema, model, Types } = require('mongoose');
 
+// subdocument schema in the Thought model
 const ReactionSchema = new Schema(
     {
         reactionId: {
@@ -10,7 +11,7 @@ const ReactionSchema = new Schema(
         reactionBody: {
             type: String,
             required: true,
-            maxlength: 280
+            maxLength: 280
         },
         username: {
             type: String,
@@ -33,7 +34,9 @@ const ThoughtSchema = new Schema(
     {
         thoughtText: {
             type: String,
-            required: [true, 'Must be between 1 and 280 characters']
+            required: true,
+            minLength: 1,
+            maxLength: 280
         },
         createdAt: {
             type: Date,
@@ -45,6 +48,7 @@ const ThoughtSchema = new Schema(
             required: true
         },
         // array of nested documents created with reactionSchema
+        // these  are like replies
         reactions: [ReactionSchema]
     },
     {

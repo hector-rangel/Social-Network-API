@@ -11,14 +11,24 @@ const UserSchema = new Schema(
         },
         email: {
             type: String,
-            required: [ true, 'Need email address' ],
+            required: [true, 'Need email address'],
             unique: true
             // must match a valid email address (mongoose matching validation)
         },
         // array of _id values referencing the Thought model,
-        thoughts: [],
-            // array of _id values referencing the User model(self-reference)
-        friends: []
+        thoughts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thought'
+            }
+        ],
+        // array of _id values referencing the User model(self-reference)
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ]
     },
     {
         toJSON: {
