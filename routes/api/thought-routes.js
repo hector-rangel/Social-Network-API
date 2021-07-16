@@ -8,12 +8,8 @@ const
 // SET up GET and POST at /api/thoughts
 router
     .route('/')
-    .get(getAllThoughts);
-
-    // create new thought id to the associated users thought array
-router
-
-
+    .get(getAllThoughts)
+    .post(createThought);
 
 // Set up GET one, PUT and DELTE /api/thoughts/:id
 router
@@ -24,9 +20,15 @@ router
 
 // Set up POST and DELETE /api/thoughts/:thoughtId/reactions
 router
+    .route('/:thoughtId/reactions')
     // create a POST reaction stored in a single thought's reactions array
-    .post()
+    .post(addReaction)
+
+router
+    .route('/:thoughtId/:reactionId')
     // pull and remove a reaction by the reactions reactionId value *removeReactionID*??
-    .delete()
-    
+    .delete(removeReaction)
+
+
+module.exports = router;
 
