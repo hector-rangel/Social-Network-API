@@ -9,7 +9,7 @@ const
         addFriend,
         removeFriend
         // need to add ../../controlers/user-controller.js once created
-    } = required('');
+    } = required('../../controllers/user-controller');
 
 // api/users
 router

@@ -1,9 +1,15 @@
 const router = required('express').Router();
 const
     {
-
+        getAllThoughts,
+        createThought,
+        getThoughtById,
+        updateThought,
+        deleteThought,
+        addReaction,
+        removeReaction
         // need to add ../../controlers/thought-controller.js once created
-    } = require('');
+    } = require('../../controllers/thought-controller');
 
 // SET up GET and POST at /api/thoughts
 router
