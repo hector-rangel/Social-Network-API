@@ -1,4 +1,4 @@
-const router = required('express').Router();
+const router = require('express').Router();
 const
     {
         getAllThoughts,
@@ -28,12 +28,12 @@ router
 router
     .route('/:thoughtId/reactions')
     // create a POST reaction stored in a single thought's reactions array
-    .post(addReaction)
+    .post(addReaction);
 
 router
     .route('/:thoughtId/:reactionId')
     // pull and remove a reaction by the reactions reactionId value *removeReactionID*??
-    .delete(removeReaction)
+    .delete(removeReaction);
 
 
 module.exports = router;

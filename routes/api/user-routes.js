@@ -1,4 +1,4 @@
-const router = required('express').Router();
+const router = require('express').Router();
 const
     {
         getAllUsers,
@@ -9,7 +9,7 @@ const
         addFriend,
         removeFriend
         // need to add ../../controlers/user-controller.js once created
-    } = required('../../controllers/user-controller');
+    } = require('../../controllers/user-controller');
 
 // api/users
 router
