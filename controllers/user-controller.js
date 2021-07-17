@@ -1,13 +1,13 @@
 const { User } = require('../models');
 
 const userController = {
-    // get all users
+    // get all users /api/users
     getAllUsers(req, res) {
         User.find({})
         .then(dbUserData => res.json(dbUserData))
         .catch(err => res.status(400).json(err));
     },
-    // get one user by id
+    // get one user by id /api/users/:id
     getUserById({ params }, res) {
         User.findOne({ _id: params.id })
         .populate({
@@ -22,7 +22,7 @@ const userController = {
         .then(dbUserData => {
             if (!dbUserData) {
                 res.status(404).json({ message: 'No user found with this id!'});
-                returnl
+                return;
             }
             res.json(dbUserData);
         })
