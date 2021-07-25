@@ -11,19 +11,25 @@ const
         // need to add ../../controlers/thought-controller.js once created
     } = require('../../controllers/thought-controller');
 
-// SET up GET and POST at /api/thoughts
+// SET up GET at /api/thoughts
 router
     .route('/')
     .get(getAllThoughts)
-    .post(createThought);
 
-// Set up GET one, PUT and DELTE /api/thoughts/:id
+// Set up GET one, PUT /api/thoughts/:id
 router
     .route('/:id')
     .get(getThoughtById)
     .put(updateThought)
-    .delete(deleteThought);
 
+// create thought and add to user
+router 
+    .route('/:userId')
+    .post(createThought);
+
+router
+    .route('/:userId/:thoughtId')
+    .delete(deleteThought);
 // Set up POST and DELETE /api/thoughts/:thoughtId/reactions
 router
     .route('/:thoughtId/reactions')
@@ -31,7 +37,7 @@ router
     .post(addReaction);
 
 router
-    .route('/:thoughtId/:reactionId')
+    .route('/:thoughtId/reactions/:reactionId')
     // pull and remove a reaction by the reactions reactionId value *removeReactionID*??
     .delete(removeReaction);
 

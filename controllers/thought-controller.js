@@ -27,11 +27,11 @@ const thoughtController = {
     },
     // create a thought POST (don't forget to push the created thought's _id to the associated user's thoughts array field)
     // /api/thoughts
-    createThought({ body }, res) {
+    createThought({ params, body }, res) {
         Thought.create(body)
         .then(({ _id }) => {
             return User.findOneAndUpdate(
-                {_id: params.pizzaId },
+                {_id: params.userId },
                 { $push: { thoughts: _id } },
                 { new: true }
             );
@@ -58,19 +58,33 @@ const thoughtController = {
         .catch(err => res.status(400).json(err));
     },
     // DELETE thoughts by id
-    deleteThought({ params}, res) {
-        Thought.findOneAndDelete({ _id: params.id })
-        .then(dbThoughtData => {
-            if (!dbThoughtData) {
-                res.status(404).json({ message: 'No thought found with this id!' });
-                return;
-            }
-            res.json(dbThoughtData);
-        })
-        .catch(err => res.json(err));
+    deleteThought({ params }, res) {
+        console.log('hello');
+        Thought.findOneAndDelete({ _id: params.thoughtId })
+            .then(deletedThought => {
+                if (!deletedThought) {
+                    return res.status(404).json({ message: 'No thought found with this id' });
+                }
+                return User.findOneAndUpdate(
+                    { _id: params.userId},
+                    { $pull: { thoughts: params.thoughtId } },
+                    { new: true }
+                );
+            })
+            .then(dbThoughtData => {
+                if (!dbThoughtData) {
+                    res.status(404).json({ message: 'no user found with this id' });
+                    return;
+                }
+                res.json(dbThoughtData);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(400).json(err);
+            })
     },
     // add reaction
-    addReaction({ params }, res) {
+    addReaction({ params, body }, res) {
         Thought.findOneAndUpdate(
             { _id: params.thoughtId },
             { $push: { reactions: body } },
