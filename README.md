@@ -31,4 +31,4 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 ### Video
 [Video of User Experience](https://drive.google.com/file/d/1oe6hWciROOieyFOqgEXLqf4rbyGd4NFR/view)
 
-![Walkthrough Video](./assets/walkthrough.gif)
+![Walkthrough Video](./assets/Walkthrough.gif)
